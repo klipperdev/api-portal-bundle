@@ -1,0 +1,36 @@
+{
+    "name": "klipper/api-portal-bundle",
+    "type": "symfony-bundle",
+    "description": "API Portal bundle of Klipper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "François Pluchino",
+            "email": "francois.pluchino@klipper.dev"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.4.0|^8.0.0",
+        "klipper/api-bundle": "^2.0.0",
+        "klipper/api-security-bundle": "^2.0.0",
+        "klipper/api-user-bundle": "^2.0.0",
+        "klipper/content-bundle": "^2.0.0",
+        "klipper/portal-bundle": "^2.0.0"
+    },
+    "require-dev": {
+        "klipper/security-oauth-bundle": "^2.0.0"
+    },
+    "autoload": {
+        "psr-4": { "Klipper\\Bundle\\ApiPortalBundle\\": "" },
+        "exclude-from-classmap": [
+            "**/Tests/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0-dev"
+        }
+    }
+}
