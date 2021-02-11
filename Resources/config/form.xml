@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Klipper\Bundle\ApiPortalBundle\Form\Type\PortalUserType">
+            <tag name="form.type" />
+            <argument type="service" id="klipper_security.organizational_context" />
+            <argument type="service" id="klipper_metadata.manager" />
+        </service>
+
+        <service id="Klipper\Bundle\ApiPortalBundle\Form\Type\CreatePortalUserType">
+            <tag name="form.type" />
+            <argument type="service" id="klipper_security.organizational_context" />
+            <argument type="service" id="klipper_resource.domain_manager" />
+            <argument type="service" id="klipper_metadata.manager" />
+        </service>
+
+        <service id="Klipper\Bundle\ApiPortalBundle\Form\Type\CreateUserType">
+            <tag name="form.type" />
+            <argument type="service" id="klipper_metadata.manager" />
+        </service>
+    </services>
+</container>
