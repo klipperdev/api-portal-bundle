@@ -33,8 +33,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
@@ -135,7 +136,7 @@ class PortalUserController
      */
     public function create(
         ControllerHelper $helper,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordHasherInterface $passwordHasher
     ): Response {
         if (class_exists(ScopeVote::class)) {
             $helper->denyAccessUnlessGranted(new ScopeVote('meta/portal_user'));
@@ -145,14 +146,16 @@ class PortalUserController
             Create::build(
                 CreatePortalUserType::class,
                 PortalUserInterface::class
-            )->addListener(static function (PostSubmitEvent $event) use ($passwordEncoder): void {
+            )->addListener(static function (PostSubmitEvent $event) use ($passwordHasher): void {
                 /** @var PortalUserInterface $data */
                 $data = $event->getData();
+                /** @var UserInterface&PasswordAuthenticatedUserInterface $user */
+                $user = $data->getUser();
 
                 if ($event->getForm()->isValid()) {
-                    $data->getUser()->setPassword(
-                        $passwordEncoder->encodePassword(
-                            $data->getUser(),
+                    $user->setPassword(
+                        $passwordHasher->hashPassword(
+                            $user,
                             $event->getForm()->get('user')->get('password')->getData()
                         )
                     );
@@ -222,7 +225,7 @@ class PortalUserController
 
         $user = $id->getUser();
 
-        if (!$user instanceof ProfileableInterface) {
+        if (!$user instanceof ProfileableInterface || !$user instanceof PasswordAuthenticatedUserInterface) {
             throw $helper->createNotFoundException();
         }
 
