@@ -32,7 +32,6 @@ class InvitationRequestType extends AbstractType
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
-                    new Expression('value && value.isPortalEnabled()'),
                 ],
             ])
             ->add('email', EmailType::class, [
