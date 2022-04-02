@@ -16,7 +16,6 @@ use Klipper\Component\Portal\Model\PortalInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Expression;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
