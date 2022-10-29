@@ -46,7 +46,6 @@ class PortalUserController
      * Invite an existing user for the portal.
      *
      * @Route("/portal_users/invite", methods={"POST"})
-     *
      * @Security("is_granted('perm:create', 'App\\Entity\\PortalUser')")
      *
      * @throws
@@ -131,7 +130,6 @@ class PortalUserController
      * Create a user for the portal.
      *
      * @Route("/portal_users/create", methods={"POST"})
-     *
      * @Security("is_granted('perm:create', 'App\\Entity\\PortalUser')")
      */
     public function create(
@@ -173,9 +171,7 @@ class PortalUserController
      *     class="App:PortalUser",
      *     expr="repository.findPortalUserById(id)"
      * )
-     *
      * @Route("/portal_users/{id}/user", methods={"PATCH"})
-     *
      * @Security("is_granted('perm:update', id)")
      */
     public function updateUser(
@@ -210,9 +206,7 @@ class PortalUserController
      *     class="App:PortalUser",
      *     expr="repository.findPortalUserById(id)"
      * )
-     *
      * @Route("/portal_users/{id}/change-password", methods={"PATCH"})
-     *
      * @Security("is_granted('perm:update', id)")
      */
     public function changePassword(
@@ -241,9 +235,7 @@ class PortalUserController
      *     class="App:PortalUser",
      *     expr="repository.findPortalUserById(id)"
      * )
-     *
      * @Route("/portal_users/{id}/user/upload", methods={"POST"})
-     *
      * @Security("is_granted('perm:update', id)")
      */
     public function uploadImage(
